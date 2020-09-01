@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ScoreButtons } from "./component/ScoreButtons";
 import { ScoreBoard } from "./component/ScoreBoard";
 
