@@ -1,4 +1,4 @@
-const { reducer, score } = require("./reducer");
+const { reducer, hit } = require("./reducer");
 const emptyInitialState = {
   servingTeam: "blue",
   score: {
@@ -18,33 +18,31 @@ describe("volleyball reducer", () => {
   });
 
   it("should score points for the serving team", () => {
-    expect(reducer(emptyInitialState, score("blue")).score).toEqual({
+    expect(reducer(emptyInitialState, hit("blue")).score).toEqual({
       red: 0,
       blue: 1,
     });
   });
 
   it("should not score points for the not-serving team", () => {
-    expect(reducer(emptyInitialState, score("red")).score).toEqual({
+    expect(reducer(emptyInitialState, hit("red")).score).toEqual({
       red: 0,
       blue: 0,
     });
   });
 
   it("should switch the server on scoring, if the other team served", () => {
-    expect(reducer(emptyInitialState, score("red")).servingTeam).toEqual("red");
+    expect(reducer(emptyInitialState, hit("red")).servingTeam).toEqual("red");
   });
 
   it("should not switch the server if the scoring team already serves", () => {
-    expect(reducer(emptyInitialState, score("blue")).servingTeam).toEqual(
-      "blue"
-    );
+    expect(reducer(emptyInitialState, hit("blue")).servingTeam).toEqual("blue");
   });
 
   it("if the not-starting team scores twice, they should have one point", () => {
     let state = reducer(undefined, {});
-    state = reducer(state, score("red"));
-    state = reducer(state, score("red"));
+    state = reducer(state, hit("red"));
+    state = reducer(state, hit("red"));
 
     expect(state.score).toEqual({
       blue: 0,
@@ -54,8 +52,8 @@ describe("volleyball reducer", () => {
 
   it("if starting team scores twice, they should have two points", () => {
     let state = reducer(undefined, {});
-    state = reducer(state, score("blue"));
-    state = reducer(state, score("blue"));
+    state = reducer(state, hit("blue"));
+    state = reducer(state, hit("blue"));
 
     expect(state.score).toEqual({
       blue: 2,
@@ -65,15 +63,15 @@ describe("volleyball reducer", () => {
 
   it("should calculate the correct result for complex games", () => {
     let state = reducer(undefined, {});
-    state = reducer(state, score("blue")); // 1:0
-    state = reducer(state, score("blue")); // 2:0
-    state = reducer(state, score("red")); // 2:0
-    state = reducer(state, score("red")); // 2:1
-    state = reducer(state, score("red")); // 2:2
-    state = reducer(state, score("red")); // 2:3
-    state = reducer(state, score("blue")); // 2:3
-    state = reducer(state, score("blue")); // 3:3
-    state = reducer(state, score("blue")); // 4:3
+    state = reducer(state, hit("blue")); // 1:0
+    state = reducer(state, hit("blue")); // 2:0
+    state = reducer(state, hit("red")); // 2:0
+    state = reducer(state, hit("red")); // 2:1
+    state = reducer(state, hit("red")); // 2:2
+    state = reducer(state, hit("red")); // 2:3
+    state = reducer(state, hit("blue")); // 2:3
+    state = reducer(state, hit("blue")); // 3:3
+    state = reducer(state, hit("blue")); // 4:3
 
     expect(state).toEqual({
       score: {

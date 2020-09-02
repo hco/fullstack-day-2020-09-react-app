@@ -6,15 +6,15 @@ const initialState = {
   },
 };
 
-export const score = (team) => {
+export const hit = (team) => {
   return {
-    type: "SCORE",
+    type: "HIT",
     team: team,
   };
 };
 
 export const reducer = (state = initialState, action = null) => {
-  if (action.type === "SCORE") {
+  if (action.type === "HIT") {
     if (action.team === state.servingTeam) {
       // you can only score if you are the serving team
       return {
