@@ -11,7 +11,7 @@ export const ScoreBoard = () => {
           <div className="scoreboard__team scoreboard__team--align-right mr-2">
             <div
               className="scoreboard__badge ml-1"
-              style={{ background: "blue" }}
+              style={{ background: "#00D4FF" }}
             />
             <div className="scoreboard__badge ml-1"></div>
             <span className="scoreboard__name">
@@ -26,7 +26,7 @@ export const ScoreBoard = () => {
           <div className="scoreboard__team scoreboard__team--align-left ml-2">
             <div
               className="scoreboard__badge mr-1"
-              style={{ background: "red" }}
+              style={{ background: "#FE53BB" }}
             />
             <span className="scoreboard__name">
               Team Red{servingTeam === "red" ? "!" : ""}
